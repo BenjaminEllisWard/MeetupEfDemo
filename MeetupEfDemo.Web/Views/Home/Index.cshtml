@@ -17,12 +17,25 @@
                 foreach (var meetup in Model.MeetupEvents)
                 {
                     var date = meetup.When.HasValue ? meetup.When.Value.ToShortDateString() : "TBA";
-            
+
                     <tr>
                         <td><a href="@Url.Action("Event", "Home", new { eventId = meetup.Id})">@meetup.EventName</a></td>
                         <td>@date</td>
                     </tr>
                 }
+
+                // TODO : Contrived example of how NOT to use an IQueryable.
+                @*for (int i = 0; i < 10; i++)
+                {
+                    var events = Model.MeetupEvents.ToArray();
+                    var meetup = events[i];
+                    var date = meetup.When.HasValue ? meetup.When.Value.ToShortDateString() : "TBA";
+
+                    <tr>
+                        <td><a href="@Url.Action("Event", "Home", new { eventId = meetup.Id})">@meetup.EventName</a></td>
+                        <td>@date</td>
+                    </tr>
+                }*@
             }
         </tbody>
     </table>
