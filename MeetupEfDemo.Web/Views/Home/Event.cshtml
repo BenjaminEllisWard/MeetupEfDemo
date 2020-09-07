@@ -1,0 +1,66 @@
+﻿@model MeetupEfDemo.Web.Models.EventViewModel;
+
+<h2>@Model.MeetupEvent.EventName</h2>
+
+<div class="event-info-container">
+    <div class="d-flex justify-content-between">
+        @{
+            if (Model.MeetupEvent.IsVirtual == true)
+            {
+                <span>Video Link: </span>
+                <span>@Model.MeetupEvent.VideoLink</span>
+            }
+            else
+            {
+                <span>Virtual Option: </span>
+                <span>@Model.IsVirtualDisplay</span>
+            }
+        }
+    </div>
+    <div class="d-flex justify-content-between">
+        <span>Where: </span>
+        <span>@Model.LocationDisplay</span>
+    </div>
+    <div class="d-flex justify-content-between">
+        <span>When: </span>
+        <span>@Model.WhenDisplay</span>
+    </div>
+</div>
+<div class="event-attendance-container">
+    <div>
+        <strong>Attending</strong>
+        @{
+            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == true))
+            {
+                <div class="d-flex justify-content-between">
+                    <span>@attendance.Person.Name</span>
+                    <span>@attendance.Person.Email</span>
+                </div>
+            }
+        }
+    </div>
+    <div>
+        <strong>Maybe</strong>
+        @{
+            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == null))
+            {
+                <div class="d-flex justify-content-between">
+                    <span>@attendance.Person.Name</span>
+                    <span>@attendance.Person.Email</span>
+                </div>
+            }
+        }
+    </div>
+    <div>
+        <strong>Not Attending</strong>
+        @{
+            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == false))
+            {
+                <div class="d-flex justify-content-between">
+                    <span>@attendance.Person.Name</span>
+                    <span>@attendance.Person.Email</span>
+                </div>
+            }
+        }
+    </div>
+</div>

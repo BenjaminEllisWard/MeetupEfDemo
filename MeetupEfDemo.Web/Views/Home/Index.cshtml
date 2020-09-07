@@ -1,8 +1,67 @@
-﻿@{
+﻿@model MeetupEfDemo.Web.Models.HomeViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="d-flex justify-content-around">
+    <table class="table w-50 p-3">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var meetup in Model.MeetupEvents)
+                {
+                    var date = meetup.When.HasValue ? meetup.When.Value.ToShortDateString() : "TBA";
+            
+                    <tr>
+                        <td><a href="@Url.Action("Event", "Home", new { eventId = meetup.Id})">@meetup.EventName</a></td>
+                        <td>@date</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    
+    <form class="d-flex flex-column p-3 border justify-content-around" style="height: 350px">
+        <input type="text" name="eventName" placeholder="Name of Event" required />
+        <select name="isVirtual">
+            <option value="" selected disabled>Virtual event?</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            <option value="">TBA</option>
+        </select>
+        <input type="text" name="videoLink" placeholder="Video link if virtual event" />
+        <input type="datetime-local" name="when" placeholder="When is your event?" />
+        <input type="text" name="location" placeholder="Where is your event?" />
+        <input type="submit" value="Create Event" />
+    </form>
 </div>
+
+@section Scripts {
+    <script>
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+    
+            var data = $("form").serializeArray();
+            var url = baseUrl + "/Home/CreateEvent";
+    
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function () {
+                    console.log("created event");
+                    location.reload();
+                },
+                error: function () {
+                    console.error("failed to create event");
+                }
+            })
+        })
+    </script>
+}

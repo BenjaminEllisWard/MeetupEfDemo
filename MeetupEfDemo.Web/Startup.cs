@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeetupEfDemo.Data.EF.Data;
+using MeetupEfDemo.Data.Repositories;
+using MeetupEfDemo.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,13 +23,21 @@ namespace MeetupEfDemo.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+
+            // Register EF context
+            var connectionString = Configuration.GetConnectionString("DbConnection");
+            services.AddDbContext<MeetupEfDemoContext>(options =>
+                options.UseSqlServer(connectionString)
+            );
+
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IEventRepository, EventRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

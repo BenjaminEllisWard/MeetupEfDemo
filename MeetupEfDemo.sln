@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupEfDemo.Web", "MeetupEfDemo.Web\MeetupEfDemo.Web.csproj", "{A1617B1D-D5B6-4AD0-8287-D4A1431550F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetupEfDemo.Web", "MeetupEfDemo.Web\MeetupEfDemo.Web.csproj", "{A1617B1D-D5B6-4AD0-8287-D4A1431550F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupEfDemo.Data", "MeetupEfDemo.Data\MeetupEfDemo.Data.csproj", "{971A8EA0-9C83-4967-8967-3CBC7BCCF0F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetupEfDemo.Data", "MeetupEfDemo.Data\MeetupEfDemo.Data.csproj", "{971A8EA0-9C83-4967-8967-3CBC7BCCF0F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupEfDemo.Service", "MeetupEfDemo.Service\MeetupEfDemo.Service.csproj", "{DFA1A16B-A052-4A8F-B7DB-7C4426A38BAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{971A8EA0-9C83-4967-8967-3CBC7BCCF0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{971A8EA0-9C83-4967-8967-3CBC7BCCF0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{971A8EA0-9C83-4967-8967-3CBC7BCCF0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA1A16B-A052-4A8F-B7DB-7C4426A38BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA1A16B-A052-4A8F-B7DB-7C4426A38BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA1A16B-A052-4A8F-B7DB-7C4426A38BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA1A16B-A052-4A8F-B7DB-7C4426A38BAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
