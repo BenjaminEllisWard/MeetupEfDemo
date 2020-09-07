@@ -2,63 +2,65 @@
 
 <h2>@Model.MeetupEvent.EventName</h2>
 
-<div class="event-info-container">
-    <div class="d-flex justify-content-between">
+<div class="border w-50 p-2 my-3">
+    <h6 class="text-center">Event Details</h6>
+    <hr />
+    <div class="d-flex">
         @{
             if (Model.MeetupEvent.IsVirtual == true)
             {
-                <span>Video Link: </span>
+                <span class="w-50 text-right mr-2">Video Link: </span>
                 <span>@Model.MeetupEvent.VideoLink</span>
             }
             else
             {
-                <span>Virtual Option: </span>
+                <span class="w-50 text-right mr-2">Virtual Option: </span>
                 <span>@Model.IsVirtualDisplay</span>
             }
         }
     </div>
-    <div class="d-flex justify-content-between">
-        <span>Where: </span>
+    <div class="d-flex">
+        <span class="w-50 text-right mr-2">Where: </span>
         <span>@Model.LocationDisplay</span>
     </div>
-    <div class="d-flex justify-content-between">
-        <span>When: </span>
+    <div class="d-flex">
+        <span class="w-50 text-right mr-2">When: </span>
         <span>@Model.WhenDisplay</span>
     </div>
 </div>
 <div class="event-attendance-container">
     <div>
-        <strong>Attending</strong>
+        <strong>Attending (@Model.Attending.Count())</strong>
         @{
-            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == true))
+            foreach (var a in Model.Attending)
             {
                 <div class="d-flex justify-content-between">
-                    <span>@attendance.Person.Name</span>
-                    <span>@attendance.Person.Email</span>
+                    <span>@a.Person.Name</span>
+                    <span>@a.Person.Email</span>
                 </div>
             }
         }
     </div>
     <div>
-        <strong>Maybe</strong>
+        <strong>Maybe (@Model.MaybeAttending.Count())</strong>
         @{
-            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == null))
+            foreach (var a in Model.MaybeAttending)
             {
                 <div class="d-flex justify-content-between">
-                    <span>@attendance.Person.Name</span>
-                    <span>@attendance.Person.Email</span>
+                    <span>@a.Person.Name</span>
+                    <span>@a.Person.Email</span>
                 </div>
             }
         }
     </div>
     <div>
-        <strong>Not Attending</strong>
+        <strong>Not Attending (@Model.NotAttending.Count())</strong>
         @{
-            foreach (var attendance in Model.MeetupEvent.EventAttendance.Where(a => a.WillAttend == false))
+            foreach (var a in Model.NotAttending)
             {
                 <div class="d-flex justify-content-between">
-                    <span>@attendance.Person.Name</span>
-                    <span>@attendance.Person.Email</span>
+                    <span>@a.Person.Name</span>
+                    <span>@a.Person.Email</span>
                 </div>
             }
         }
