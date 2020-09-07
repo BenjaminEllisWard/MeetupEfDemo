@@ -23,7 +23,11 @@ namespace MeetupEfDemo.Service
 
         public IEnumerable<MeetupEvent> GetMeetupEvents()
         {
-            return _repository.GetMeetupEvents().ToList();
+            // TODO : Query syntax example
+            return 
+                from e in _repository.GetMeetupEvents()
+                orderby e.When descending
+                select e;
         }
 
         public MeetupEvent GetMeetupEvent(int eventId)
