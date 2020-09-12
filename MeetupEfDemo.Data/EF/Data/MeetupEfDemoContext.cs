@@ -72,6 +72,41 @@ namespace MeetupEfDemo.Data.EF.Data
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_EventAttendance_MeetupEventId");
             });
+
+            // TODO : Seed user data for demo
+            //modelBuilder.Entity<Person>()
+            //    .HasData(
+            //        new Person
+            //        {
+            //            Id = 1,
+            //            Name = "Ben",
+            //            Email = "ben@test.com"
+            //        },
+            //        new Person
+            //        {
+            //            Id = 2,
+            //            Name = "Bill",
+            //            Email = "bill@test.com"
+            //        },
+            //        new Person
+            //        {
+            //            Id = 3,
+            //            Name = "Fred",
+            //            Email = "fred@test.com"
+            //        },
+            //        new Person
+            //        {
+            //            Id = 4,
+            //            Name = "Theodore",
+            //            Email = "theodore@test.com"
+            //        },
+            //        new Person
+            //        {
+            //            Id = 5,
+            //            Name = "Steve",
+            //            Email = "steve@test.com"
+            //        }
+            //    );
         }
     }
 }
