@@ -86,7 +86,8 @@ namespace MeetupEfDemo.Data.EF.Data
             //        {
             //            Id = 2,
             //            Name = "Bill",
-            //            Email = "bill@test.com"
+            //            // TODO : Fix email clash for demo
+            //            Email = "ben@test.com"
             //        },
             //        new Person
             //        {
