@@ -1,24 +1,32 @@
 ﻿using MeetupEfDemo.Data.EF.Models;
 using MeetupEfDemo.Data.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MeetupEfDemo.Service
 {
-    public interface IEventService
+    public interface IMeetupService
     {
+        public IEnumerable<Person> GetPeople();
         public IEnumerable<MeetupEvent> GetMeetupEvents();
         public MeetupEvent GetMeetupEvent(int eventId);
         void CreateEvent(MeetupEvent meetupEvent);
+        bool AddAttendee(EventAttendance eventAttendance);
     }
 
-    public class EventService : IEventService
+    public class MeetupService : IMeetupService
     {
-        private readonly IEventRepository _repository;
+        private readonly IMeetupRepository _repository;
 
-        public EventService(IEventRepository repository)
+        public MeetupService(IMeetupRepository repository)
         {
             _repository = repository;
+        }
+
+        public IEnumerable<Person> GetPeople()
+        {
+            return _repository.GetPeople().ToList();
         }
 
         public IEnumerable<MeetupEvent> GetMeetupEvents()
@@ -38,6 +46,11 @@ namespace MeetupEfDemo.Service
         public void CreateEvent(MeetupEvent meetupEvent)
         {
             _repository.CreateEvent(meetupEvent);
+        }
+
+        public bool AddAttendee(EventAttendance eventAttendance)
+        {
+            return _repository.AddAttendee(eventAttendance);
         }
     }
 }

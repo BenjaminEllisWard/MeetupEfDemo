@@ -2,67 +2,49 @@
 
 <h2>@Model.MeetupEvent.EventName</h2>
 
-<div class="border w-50 p-2 my-3">
-    <h6 class="text-center">Event Details</h6>
-    <hr />
-    <div class="d-flex">
-        @{
-            if (Model.MeetupEvent.IsVirtual == true)
-            {
-                <span class="w-50 text-right mr-2">Video Link: </span>
-                <span>@Model.MeetupEvent.VideoLink</span>
+<div class="d-flex">
+    @{ @await Html.PartialAsync("Partial/_eventDetailsPartial", Model) }
+    <form class="d-flex flex-column p-3 border justify-content-around">
+        <h5>Add Attendee</h5>
+        <select name="personId" required>
+            <option value="" selected disabled required>Choose a person</option>
+            @{
+                foreach (var person in Model.People)
+                {
+                    <option value="@person.Id">@person.Name</option>
+                }
             }
-            else
-            {
-                <span class="w-50 text-right mr-2">Virtual Option: </span>
-                <span>@Model.IsVirtualDisplay</span>
-            }
-        }
-    </div>
-    <div class="d-flex">
-        <span class="w-50 text-right mr-2">Where: </span>
-        <span>@Model.LocationDisplay</span>
-    </div>
-    <div class="d-flex">
-        <span class="w-50 text-right mr-2">When: </span>
-        <span>@Model.WhenDisplay</span>
-    </div>
+        </select>
+        <select name="willAttend" required>
+            <option value="true" selected>Will Attend</option>
+            <option value="">Maybe</option>
+            <option value="false">Not Attending</option>
+        </select>
+        <input type="hidden" name="meetupEventId" value="@Model.MeetupEvent.Id" required />
+        <button class="btn btn-sm btn-primary" type="submit">Add Attendee</button>
+    </form>
 </div>
-<div class="event-attendance-container">
-    <div>
-        <strong>Attending (@Model.Attending.Count())</strong>
-        @{
-            foreach (var a in Model.Attending)
-            {
-                <div class="d-flex justify-content-between">
-                    <span>@a.Person.Name</span>
-                    <span>@a.Person.Email</span>
-                </div>
-            }
-        }
-    </div>
-    <div>
-        <strong>Maybe (@Model.MaybeAttending.Count())</strong>
-        @{
-            foreach (var a in Model.MaybeAttending)
-            {
-                <div class="d-flex justify-content-between">
-                    <span>@a.Person.Name</span>
-                    <span>@a.Person.Email</span>
-                </div>
-            }
-        }
-    </div>
-    <div>
-        <strong>Not Attending (@Model.NotAttending.Count())</strong>
-        @{
-            foreach (var a in Model.NotAttending)
-            {
-                <div class="d-flex justify-content-between">
-                    <span>@a.Person.Name</span>
-                    <span>@a.Person.Email</span>
-                </div>
-            }
-        }
-    </div>
-</div>
+
+@section Scripts {
+    <script>
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+
+            var data = $("form").serializeArray();
+            var url = baseUrl + "/Home/AddAttendee";
+
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (response) {
+                    console.log("added attendee");
+                    $("#event-details-container").replaceWith(response)
+                },
+                error: function () {
+                    console.error("failed to add attendee");
+                }
+            })
+        })
+    </script>
+}

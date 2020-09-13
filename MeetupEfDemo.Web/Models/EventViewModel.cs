@@ -79,5 +79,7 @@ namespace MeetupEfDemo.Web.Models
                 }
             }
         }
+
+        public IEnumerable<Person> People { get; internal set; }
     }
 }

@@ -34,8 +34,8 @@ namespace MeetupEfDemo.Web
                 options.UseSqlServer(connectionString)
             );
 
-            services.AddScoped<IEventService, EventService>();
-            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IMeetupService, MeetupService>();
+            services.AddScoped<IMeetupRepository, MeetupRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -13,9 +13,9 @@ namespace MeetupEfDemo.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEventService _service;
+        private readonly IMeetupService _service;
 
-        public HomeController(IEventService service)
+        public HomeController(IMeetupService service)
         {
             _service = service;
         }
@@ -34,6 +34,7 @@ namespace MeetupEfDemo.Web.Controllers
         {
             var model = new EventViewModel
             {
+                People = _service.GetPeople(),
                 MeetupEvent = _service.GetMeetupEvent(eventId)
             };
 
@@ -44,6 +45,20 @@ namespace MeetupEfDemo.Web.Controllers
         public void CreateEvent(MeetupEvent meetupEvent)
         {
             _service.CreateEvent(meetupEvent);
+        }
+
+        [HttpPost]
+        public IActionResult AddAttendee(EventAttendance eventAttendance)
+        {
+            _service.AddAttendee(eventAttendance);
+
+            var model = new EventViewModel
+            {
+                People = _service.GetPeople(),
+                MeetupEvent = _service.GetMeetupEvent(eventAttendance.MeetupEventId)
+            };
+
+            return PartialView("~/Views/Home/Partial/_eventDetailsPartial.cshtml", model);
         }
     }
 }

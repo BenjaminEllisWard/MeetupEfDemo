@@ -1,0 +1,68 @@
+﻿@model MeetupEfDemo.Web.Models.EventViewModel;
+
+<div id="event-details-container" class="w-50 mr-auto">
+    <div class="border p-2 my-3">
+        <h6 class="text-center">Event Details</h6>
+        <hr />
+        <div class="d-flex">
+            @{
+                if (Model.MeetupEvent.IsVirtual == true)
+                {
+                    <span class="w-50 text-right mr-2">Video Link: </span>
+                    <span>@Model.MeetupEvent.VideoLink</span>
+                }
+                else
+                {
+                    <span class="w-50 text-right mr-2">Virtual Option: </span>
+                    <span>@Model.IsVirtualDisplay</span>
+                }
+            }
+        </div>
+        <div class="d-flex">
+            <span class="w-50 text-right mr-2">Where: </span>
+            <span>@Model.LocationDisplay</span>
+        </div>
+        <div class="d-flex">
+            <span class="w-50 text-right mr-2">When: </span>
+            <span>@Model.WhenDisplay</span>
+        </div>
+    </div>
+    <div class="event-attendance-container">
+        <div>
+            <strong>Attending (@Model.Attending.Count())</strong>
+            @{
+                foreach (var a in Model.Attending)
+                {
+                    <div class="d-flex justify-content-between">
+                        <span class="pl-3">@a.Person.Name</span>
+                        <span>@a.Person.Email</span>
+                    </div>
+                }
+            }
+        </div>
+        <div>
+            <strong>Maybe (@Model.MaybeAttending.Count())</strong>
+            @{
+                foreach (var a in Model.MaybeAttending)
+                {
+                    <div class="d-flex justify-content-between">
+                        <span class="pl-3">@a.Person.Name</span>
+                        <span>@a.Person.Email</span>
+                    </div>
+                }
+            }
+        </div>
+        <div>
+            <strong>Not Attending (@Model.NotAttending.Count())</strong>
+            @{
+                foreach (var a in Model.NotAttending)
+                {
+                    <div class="d-flex justify-content-between">
+                        <span class="pl-3">@a.Person.Name</span>
+                        <span>@a.Person.Email</span>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
