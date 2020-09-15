@@ -4,9 +4,10 @@
 
 <div class="d-flex">
     @{ @await Html.PartialAsync("Partial/_eventDetailsPartial", Model) }
-    <form class="d-flex flex-column p-3 border justify-content-around">
-        <h5>Add Attendee</h5>
-        <select name="personId" required>
+    <form class="p-2 my-3 border" style="height: fit-content">
+        <h6 class="text-center">Add Attendee</h6>
+        <hr class="w-100" />
+        <select name="personId" class="my-2 d-block w-100" required>
             <option value="" selected disabled required>Choose a person</option>
             @{
                 foreach (var person in Model.People)
@@ -15,13 +16,13 @@
                 }
             }
         </select>
-        <select name="willAttend" required>
+        <select name="willAttend" class="my-2 d-block w-100" required>
             <option value="true" selected>Will Attend</option>
             <option value="">Maybe</option>
             <option value="false">Not Attending</option>
         </select>
-        <input type="hidden" name="meetupEventId" value="@Model.MeetupEvent.Id" required />
-        <button class="btn btn-sm btn-primary" type="submit">Add Attendee</button>
+        <input type="hidden" name="meetupEventId" class="my-2 w-100" value="@Model.MeetupEvent.Id" required />
+        <button class="btn btn-sm btn-primary my-2 d-block w-100" type="submit">Add Attendee</button>
     </form>
 </div>
 
