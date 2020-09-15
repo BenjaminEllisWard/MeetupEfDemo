@@ -58,6 +58,7 @@ namespace MeetupEfDemo.Data.Repositories
 
         public bool AddAttendee(EventAttendance eventAttendance)
         {
+            // TODO : demonstrate entity changes after insert.
             _context.EventAttendances.Add(eventAttendance);
             return _context.SaveChanges() == 1;
         }
