@@ -53,9 +53,7 @@ namespace MeetupEfDemo.Data.Repositories
         public bool AddAttendee(EventAttendance eventAttendance)
         {
             _context.EventAttendances.Add(eventAttendance);
-            _context.SaveChanges();
-
-            return eventAttendance.Id > 0;
+            return _context.SaveChanges() == 1;
         }
     }
 }
