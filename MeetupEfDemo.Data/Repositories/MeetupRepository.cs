@@ -42,6 +42,12 @@ namespace MeetupEfDemo.Data.Repositories
                 .Include(me => me.EventAttendance)
                 .Where(me => me.Id == eventId)
                 .Single();
+
+            // TODO : demonstrate raw sql query.
+            //return _context.MeetupEvents
+            //    .FromSqlRaw("SELECT * FROM dbo.MeetupEvents WHERE ID = {0}", eventId)
+            //    .Include(e => e.EventAttendance)
+            //    .Single();
         }
 
         public void CreateEvent(MeetupEvent meetupEvent)

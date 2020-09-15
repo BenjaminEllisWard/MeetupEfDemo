@@ -58,6 +58,9 @@ namespace MeetupEfDemo.Data.EF.Data
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                // TODO : Demonstrate composite key with migration
+                //entity.HasKey(e => new { e.PersonId, e.MeetupEventId });
+
                 // Describe one-to-many relationship between person and attendance.
                 entity.HasOne(e => e.Person)
                     .WithMany(p => p.EventAttendance)
